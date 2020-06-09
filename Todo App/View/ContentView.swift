@@ -11,6 +11,8 @@ import SwiftUI
 struct ContentView: View {
     // MARK: - PROPERTIES
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     @State private var showingAddTodoView: Bool = false
     
     // MARK: - BODY
@@ -20,17 +22,17 @@ struct ContentView: View {
             List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
                 Text("Hello, World!")
             } //: LIST
-                .navigationBarTitle("Todo", displayMode: .inline)
-                .navigationBarItems(trailing:
-                    Button(action: {
-                        self.showingAddTodoView.toggle()
-                    }) {
-                        Image(systemName: "plus")
-                    } //: ADD BUTTON
-                        .sheet(isPresented: $showingAddTodoView) {
-                            AddTodoView()
-                    }
-                )
+            .navigationBarTitle("Todo", displayMode: .inline)
+            .navigationBarItems(trailing:
+                Button(action: {
+                    self.showingAddTodoView.toggle()
+                }) {
+                    Image(systemName: "plus")
+                } //: ADD BUTTON
+                .sheet(isPresented: $showingAddTodoView) {
+                    AddTodoView().environment(\.managedObjectContext, self.managedObjectContext)
+                }
+            )
         } //: NAVIGATION
     }
 }
