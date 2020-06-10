@@ -75,8 +75,8 @@ struct AddTodoView: View {
                     Image(systemName: "xmark")
                 }
             )
-                .alert(isPresented: $errorShowing) {
-                    Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+            .alert(isPresented: $errorShowing) {
+                Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("OK")))
             }
         } //: NAVIGATION
     }
